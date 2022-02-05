@@ -1,0 +1,30 @@
+.content {
+    grid-area: cont;
+    border: dashed black;
+  
+    display: grid;
+  
+    grid-template-areas: 
+    "profile"
+    "input"
+    "posts";/*разметка 3-х строк в content гриде по grid-area ниже*/
+  
+    grid-template-rows: 60px 60px 1fr;/*3 строки, 60пкс 20пкс и остальное*/
+    grid-template-columns: 1fr;/*1 колонка*/
+    /*grid-gap: 10px;*/
+  }
+  
+  .content .profile {
+    grid-area: profile;
+    border: dashed black;
+  }
+  
+  .content .input {
+    grid-area: input;
+    border: dashed black;
+  }
+  
+  .content .posts {
+    grid-area: posts;
+    border: dashed black;
+  }

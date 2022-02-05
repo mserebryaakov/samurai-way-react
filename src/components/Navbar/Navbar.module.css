@@ -1,0 +1,33 @@
+.nav {
+    grid-area: nav;
+    border: dashed black;
+  
+    display: grid;
+  
+    grid-template-areas: 
+    "profile message music settings";/*разметка 4-х столбов в nav гриде по grid-area ниже*/
+  
+    grid-template-rows: 1fr;/*3 строки, 60пкс 20пкс и остальное*/
+    grid-template-columns: 1fr 1fr 1fr 1fr;/*4 равных колонки*/
+    /*grid-gap: 10px;*/
+  }
+  
+  .nav .profile {
+    grid-area: profile;
+    border: dashed black;
+  }
+  
+  .nav .message {
+    grid-area: message;
+    border: dashed black;
+  }
+  
+  .nav .music {
+    grid-area: music;
+    border: dashed black;
+  }
+  
+  .nav .settings {
+    grid-area: settings;
+    border: dashed black;
+  }
