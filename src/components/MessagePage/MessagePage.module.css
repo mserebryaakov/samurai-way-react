@@ -1,0 +1,22 @@
+.content {
+    grid-area: cont;
+  
+    display: grid;
+  
+    grid-template-areas: 
+    "dialogs dialog";/*разметка одной строки в content гриде по grid-area ниже*/
+  
+    grid-template-rows: 1fr;/*1 строка*/
+    grid-template-columns: 1fr 2fr;/*2 колонка*/
+    /*grid-gap: 10px;*/
+  }
+
+.content .dialogs {
+  grid-area: dialogs;
+  border: dashed black;
+}
+
+.content .dialog {
+  grid-area: dialog;
+  border: dashed black;
+}

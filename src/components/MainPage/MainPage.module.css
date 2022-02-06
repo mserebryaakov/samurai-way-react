@@ -1,6 +1,5 @@
 .content {
     grid-area: cont;
-    border: dashed black;
   
     display: grid;
   

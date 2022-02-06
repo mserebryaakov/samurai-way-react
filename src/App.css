@@ -11,3 +11,8 @@
   grid-template-columns: 1fr;/*1 колонка*/
   /*grid-gap: 10px;*/
 }
+
+.app-wrapper-content {
+  grid-area: cont;
+  border: dashed black;
+}

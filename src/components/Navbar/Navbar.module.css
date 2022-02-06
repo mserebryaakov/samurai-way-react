@@ -12,22 +12,31 @@
     /*grid-gap: 10px;*/
   }
   
-  .nav .profile {
-    grid-area: profile;
-    border: dashed black;
-  }
-  
-  .nav .message {
-    grid-area: message;
-    border: dashed black;
-  }
-  
-  .nav .music {
-    grid-area: music;
-    border: dashed black;
-  }
-  
-  .nav .settings {
-    grid-area: settings;
-    border: dashed black;
-  }
+a {
+  color:black;
+  text-decoration: none;
+}
+
+.active {
+  color:gold;
+}
+
+.nav .profile {
+  grid-area: profile;
+  border: dashed black;
+}
+
+.nav .message {
+  grid-area: message;
+  border: dashed black;
+}
+
+.nav .music {
+  grid-area: music;
+  border: dashed black;
+}
+
+.nav .settings {
+  grid-area: settings;
+  border: dashed black;
+}
