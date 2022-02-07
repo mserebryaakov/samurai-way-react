@@ -3,7 +3,9 @@ let state = {
         postData : [
             {id: 1, textPost: "Привет"},
             {id: 2, textPost: "Как дела?"}
-        ]
+        ],
+
+        profileData : {id: 1, name: "User 1", subscribers: 1234, subscription: 123}
     },
 
     messagePage : {

@@ -9,10 +9,10 @@ function MainPage(props) {
 
     return (
         <div className={s.content}>
-            <Profile name="Имя профиля" />
+            <Profile state={props.state.profileData}/>
 
-            <div className={s.input}>
-                <p>Ввод текста</p>
+            <div className={s.inputGrid}>
+                <input type="text"></input>
             </div>
 
             <div className={s.posts}>
