@@ -2,15 +2,11 @@ import s from './MainPage.module.css'
 import Post from './Post/Post'
 import Profile from './Profile/Profile'
 
-let postData = [
-    {id: 1, textPost: "Привет"},
-    {id: 2, textPost: "Как дела?"}
-];
+function MainPage(props) {
 
-let postElements = postData
+    let postElements = props.state.postData
     .map( element => <Post text={element.textPost} /> )
 
-function MainPage() {
     return (
         <div className={s.content}>
             <Profile name="Имя профиля" />
