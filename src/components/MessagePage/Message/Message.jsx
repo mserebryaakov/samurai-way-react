@@ -1,6 +1,6 @@
-import s from './Post.module.css'
+import s from './Message.module.css';
 
-function Post(props) {
+function Message(props) {
     return (
         <div className={s.item}>
             <p>{props.text}</p>
@@ -8,4 +8,4 @@ function Post(props) {
     );
 }
 
-export default Post;
+export default Message;

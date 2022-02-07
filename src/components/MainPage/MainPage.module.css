@@ -13,17 +13,12 @@
     /*grid-gap: 10px;*/
   }
   
-  .content .profile {
-    grid-area: profile;
-    border: dashed black;
-  }
-  
-  .content .input {
-    grid-area: input;
-    border: dashed black;
-  }
-  
-  .content .posts {
-    grid-area: posts;
-    border: dashed black;
-  }
+.content .input {
+  grid-area: input;
+  border: dashed black;
+}
+
+.content .posts {
+  grid-area: posts;
+  border: dashed black;
+}

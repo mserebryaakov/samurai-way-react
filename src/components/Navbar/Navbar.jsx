@@ -10,12 +10,12 @@ function Navbar() {
             <div className={s.message}>
                 <NavLink to="/message" className = { navData => navData.isActive ? s.active : s.a }>Сообщения</NavLink>
             </div>
-            <div className={s.music}>
+            {/* <div className={s.music}>
                 <a>Музыка</a>
             </div>
             <div className={s.settings}>
                 <a>Настройки</a>
-            </div>
+            </div> */}
         </nav>
     );
 }
