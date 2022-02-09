@@ -8,24 +8,36 @@
     "input"
     "posts";/*разметка 3-х строк в content гриде по grid-area ниже*/
   
-    grid-template-rows: 90px 50px 1fr;/*3 строки, 60пкс 20пкс и остальное*/
+    grid-template-rows: 90px 90px 1fr;/*3 строки, 60пкс 20пкс и остальное*/
     grid-template-columns: 1fr;/*1 колонка*/
     /*grid-gap: 10px;*/
   }
   
 .content .inputGrid {
   grid-area: input;
+  background: white;
+  margin-top: 1%;
   /* border: dashed black; */
+  box-shadow: 1px 1px 2px rgb(194, 194, 194);
+  border-radius: 10px;
 }
 
-input {
+.inputText {
     background: white;
-    border: none;
+    margin-left: 1%;
+    border: 1px solid;
     display: block;
-    height: 20px;
-    border-radius: 10px;
-    margin-top: 15px;
+    height: 15px;
+    margin-top: 1%;
     box-shadow: 1px 1px 2px rgb(194, 194, 194);
-    width: 98%;
+    width: 95%;
     padding: 1%;
+}
+
+.inputButton {
+    background: white;
+    margin-left: 1%;
+    margin-top: 1%;
+    font-family: Oswald;
+    font-size: 10pt;
 }

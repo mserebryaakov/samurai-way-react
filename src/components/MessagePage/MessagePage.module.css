@@ -9,14 +9,36 @@
     grid-template-rows: 1fr;/*1 строка*/
     grid-template-columns: 1fr 2fr;/*2 колонка*/
     /*grid-gap: 10px;*/
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px rgb(194, 194, 194);
+
   }
 
 .content .dialogs {
   grid-area: dialogs;
-  border: dashed black;
+  /* border: dashed black; */
 }
 
 .content .dialog {
   grid-area: dialog;
-  border: dashed black;
+  /* border: dashed black; */
+}
+
+.inputText {
+  background: white;
+  border: 1px solid;
+  display: block;
+  height: 15px;
+  margin-top: 1%;
+  box-shadow: 1px 1px 2px rgb(194, 194, 194);
+  width: 97%;
+  padding: 1%;
+}
+
+.inputButton {
+  background: white;
+  margin-top: 1%;
+  font-family: Oswald;
+  font-size: 10pt;
 }

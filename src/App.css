@@ -24,5 +24,4 @@ body {
 .app-wrapper-content {
   margin: 0 20% 0;
   grid-area: cont;
-  border: dashed black;
 }

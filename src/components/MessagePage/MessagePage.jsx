@@ -18,7 +18,12 @@ function MessagePage(props) {
 
             <div className={s.dialog}>
                 {messageElements}
+                <div>
+                    <textarea className={s.inputText}></textarea>
+                </div>
+                <button className={s.inputButton}>Отправить</button>
             </div>
+
         </div>
     );
 }
