@@ -1,4 +1,5 @@
 const ADD_POST = "ADD-POST";
+const ADD_MESSSAGE = "ADD-MESSAGE";
 
 let store = {
     _state: {
@@ -40,13 +41,21 @@ let store = {
     //     this._callSubscriber(this._state);
     // },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 textPost: action.message
             };
         
             this._state.mainPage.postData.push(newPost)
+            this._callSubscriber(this._state);
+        } else if (action.type === ADD_MESSSAGE) {
+            let newMessage = {
+                id: 3,
+                message: action.message
+            };
+
+            this._state.messagePage.messageData.push(newMessage)
             this._callSubscriber(this._state);
         }
     }
@@ -59,4 +68,11 @@ export const addPostActionCreater = (text) => {
     }
 }
 
+export const addMessageActionCreater = (text) => {
+    return {
+        type: ADD_MESSSAGE,
+        message: text
+    }
+}
+ 
 export default store;

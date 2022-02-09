@@ -1,6 +1,8 @@
 import s from './MessagePage.module.css'
 import Dialogs from './Dialogs/Dialogs'
 import Message from './Message/Message'
+import React from 'react'
+import {addMessageActionCreater} from '../../redux/state'
 
 function MessagePage(props) {
 
@@ -9,6 +11,14 @@ function MessagePage(props) {
 
     let dialogElements = props.state.dialogData
         .map(element => <Dialogs name={element.name} id={element.id} />)
+
+    let newMessageElement = React.createRef();
+    
+    let addMessage = () => {
+        let text = newMessageElement.current.value;
+        props.dispatch(addMessageActionCreater(text));
+        newMessageElement.current.value = "";
+    }
 
     return (
         <div className={s.content}>
@@ -19,9 +29,9 @@ function MessagePage(props) {
             <div className={s.dialog}>
                 {messageElements}
                 <div>
-                    <textarea className={s.inputText}></textarea>
+                    <textarea className={s.inputText} ref={newMessageElement}></textarea>
                 </div>
-                <button className={s.inputButton}>Отправить</button>
+                <button className={s.inputButton} onClick={addMessage}>Отправить</button>
             </div>
 
         </div>
