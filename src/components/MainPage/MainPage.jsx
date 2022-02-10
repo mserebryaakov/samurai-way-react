@@ -2,7 +2,7 @@ import s from './MainPage.module.css'
 import Post from './Post/Post'
 import Profile from './Profile/Profile'
 import React from 'react'
-import { addPostActionCreater } from '../../redux/state'
+import { addPostActionCreater } from '../../redux/profile-reducer'
 
 function MainPage(props) {
 

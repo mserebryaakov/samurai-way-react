@@ -2,7 +2,7 @@ import s from './MessagePage.module.css'
 import Dialogs from './Dialogs/Dialogs'
 import Message from './Message/Message'
 import React from 'react'
-import {addMessageActionCreater} from '../../redux/state'
+import {addMessageActionCreater} from '../../redux/dialogs-reducer'
 
 function MessagePage(props) {
 
