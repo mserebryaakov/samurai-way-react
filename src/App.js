@@ -1,9 +1,9 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import MainPage from './components/MainPage/MainPage';
-import MessagePage from './components/MessagePage/MessagePage';
+import MessagePageContainer from './components/MessagePage/MessagePageContainer';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPageContainer from './components/MainPage/MainPageContainer';
 
 function App(props) {
   return (
@@ -16,12 +16,8 @@ function App(props) {
 
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile" element={<MainPage
-              state={props.state.mainPage}
-              dispatch={props.dispatch} />} />
-            <Route path="/message/*" element={<MessagePage 
-              state={props.state.messagePage}
-              dispatch={props.dispatch} />} />
+            <Route path="/profile" element={<MainPageContainer store={props.store} />} />
+            <Route path="/message/*" element={<MessagePageContainer store={props.store} />} />
           </Routes>
         </div>
 
