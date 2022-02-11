@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-function rerenderDOM(state) {
+function rerenderDOM() {
   ReactDOM.render(
       <React.StrictMode>
         <App store={store} />
@@ -14,11 +14,10 @@ function rerenderDOM(state) {
   );
 }
 
-rerenderDOM(store.getState());
+rerenderDOM();
 
 store.subscribe(() => {
-  let state = store.getState();
-  rerenderDOM(state);
+  rerenderDOM();
 });
 
 // If you want to start measuring performance in your app, pass a function
