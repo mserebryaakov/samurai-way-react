@@ -6,10 +6,10 @@ import React from 'react'
 function MessagePage(props) {
 
     let messageElements = props.messageData
-        .map(element => <Message text={element.message} />);
+        .map(element => <Message text={element.message} key={element.id}/>);
 
     let dialogElements = props.dialogData
-        .map(element => <Dialogs name={element.name} id={element.id} />)
+        .map(element => <Dialogs name={element.name} id={element.id} key={element.id}/>)
     
     let onUpdateMessage = (e) => {
         let text = e.target.value;

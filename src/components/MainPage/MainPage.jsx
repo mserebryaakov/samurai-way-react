@@ -6,7 +6,7 @@ import React from 'react'
 function MainPage(props) {
 
     let postElements = props.postData
-        .map(element => <Post text={element.textPost} />)
+        .map(element => <Post text={element.textPost} key={element.id}/>)
 
     let onUpdateText = (e) => {
         let text = e.target.value;
