@@ -1,25 +1,27 @@
-import React from 'react'
 import {updatePostActionCreater, addPostActionCreater } from '../../redux/profile-reducer'
 import MainPage from './MainPage'
+import { connect } from 'react-redux';
 
-function MainPageContainer(props) {
-    let state = props.store.getState().mainPage;
-
-    let updatePostText = (text) => {
-        props.store.dispatch(updatePostActionCreater(text));
+let mapStateToProps = (state) => {
+    return {
+        postData: state.mainPage.postData,
+        areaValue: state.mainPage.currentTextPost,
+        profileData: state.mainPage.profileData
     }
-
-    let addPost = () => {
-        props.store.dispatch(addPostActionCreater());
-    }
-
-    return (
-        <MainPage updatePostText={updatePostText} 
-        addPost={addPost} 
-        postData={state.postData} 
-        areaValue={state.currentTextPost}
-        profileData={state.profileData}/>
-    );
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updatePostText: (text) => {
+            dispatch(updatePostActionCreater(text));
+        },
+        addPost: () => {
+            dispatch(addPostActionCreater());
+        }
+    }
+}
+
+const MainPageContainer = connect(mapStateToProps, mapDispatchToProps)(MainPage);
+
 
 export default MainPageContainer;

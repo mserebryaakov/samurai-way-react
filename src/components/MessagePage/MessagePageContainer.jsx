@@ -1,26 +1,26 @@
-import React from 'react'
-import {updateMessageActionCreater, addMessageActionCreater} from '../../redux/dialogs-reducer'
+import { connect } from 'react-redux';
+import { updateMessageActionCreater, addMessageActionCreater } from '../../redux/dialogs-reducer'
 import MessagePage from './MessagePage'
 
-function MessagePageContainer(props) {
-
-    let state = props.store.getState().messagePage;
-    
-    let updateMessage = (text) => {
-        props.store.dispatch(updateMessageActionCreater(text));
+let mapStateToProps = (state) => {
+    return {
+        messageData: state.messagePage.messageData,
+        dialogData: state.messagePage.dialogData,
+        areaValue: state.messagePage.currentTextMessage
     }
-
-    let addMessage = () => {
-        props.store.dispatch(addMessageActionCreater());
-    }
-
-    return (
-        <MessagePage messageData={state.messageData}
-        dialogData={state.dialogData}
-        updateMessage={updateMessage}
-        addMessage={addMessage}
-        areaValue={state.currentTextMessage}/>
-    );
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateMessage: (text) => {
+            dispatch(updateMessageActionCreater(text));
+        },
+        addMessage: () => {
+            dispatch(addMessageActionCreater());
+        }
+    }
+}
+
+const MessagePageContainer = connect(mapStateToProps, mapDispatchToProps)(MessagePage);
 
 export default MessagePageContainer;
