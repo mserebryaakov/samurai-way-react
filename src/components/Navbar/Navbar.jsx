@@ -10,6 +10,9 @@ function Navbar() {
             <span className={s.message}>
                 <NavLink to="/message" className = { navData => navData.isActive ? s.active : s.a }>Сообщения</NavLink>
             </span>
+            <span className={s.message}>
+                <NavLink to="/users" className = { navData => navData.isActive ? s.active : s.a }>Пользователи</NavLink>
+            </span>
         </nav>
     );
 }

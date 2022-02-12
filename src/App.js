@@ -4,6 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import MessagePageContainer from './components/MessagePage/MessagePageContainer';
 import { Routes, Route } from "react-router-dom";
 import MainPageContainer from './components/MainPage/MainPageContainer';
+import UsersPageContainer from './components/Users/UsersPageContainer';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/profile" element={<MainPageContainer />} />
             <Route path="/message/*" element={<MessagePageContainer />} />
+            <Route path="/users" element={<UsersPageContainer />} />
           </Routes>
         </div>
 

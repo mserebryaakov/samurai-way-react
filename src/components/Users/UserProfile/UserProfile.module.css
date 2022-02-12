@@ -1,0 +1,41 @@
+.profile {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px rgb(194, 194, 194);
+    display: flex;
+    align-items: center;
+    margin-bottom: 1%;
+    height: 90px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    margin-left: 2%;
+}
+
+.photo {
+  width: 70px;
+  border-radius: 40px;
+}
+
+.profileInfo {
+  font-size: 11pt;
+  margin-left: 3%;
+}
+
+.item {
+  margin: 0;
+  width: 300px;
+}
+
+.divButton {
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.followButton {
+    background: white;
+    font-family: Oswald;
+    font-size: 10pt;
+}
