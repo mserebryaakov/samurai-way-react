@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateMessageActionCreater, addMessageActionCreater } from '../../redux/dialogs-reducer'
+import { updateMessageActionCreater, addMessageActionCreater, setDialogsActionCreater } from '../../redux/dialogs-reducer'
 import MessagePage from './MessagePage'
 
 let mapStateToProps = (state) => {
@@ -17,6 +17,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         addMessage: () => {
             dispatch(addMessageActionCreater());
+        },
+        setUsers: (messageData,currentTextMessage,dialogData) => {
+            dispatch(setDialogsActionCreater(messageData,currentTextMessage,dialogData));
         }
     }
 }

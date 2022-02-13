@@ -2,40 +2,59 @@ import s from './MessagePage.module.css'
 import Dialogs from './Dialogs/Dialogs'
 import Message from './Message/Message'
 import React from 'react'
+import * as axios from 'axios'
 
-function MessagePage(props) {
+class MessagePage extends React.Component {
 
-    let messageElements = props.messageData
-        .map(element => <Message text={element.message} key={element.id}/>);
+    componentDidMount() {
+        axios.get("http://localhost:8181/users").then(response => {
+                this.props.setUsers(response.data.messageData,
+                    response.data.currentTextMessage,
+                    response.data.dialogData)
+            });
+    }
 
-    let dialogElements = props.dialogData
-        .map(element => <Dialogs name={element.name} id={element.id} key={element.id}/>)
-    
-    let onUpdateMessage = (e) => {
+    createMessageElements = () => {
+        return (
+            this.props.messageData
+                .map(element => <Message text={element.message} key={element.id} />)
+        )
+    }
+
+    createDialogElements = () => {
+        return (
+            this.props.dialogData
+                .map(element => <Dialogs name={element.name} id={element.id} key={element.id} />)
+        )
+    }
+
+    onUpdateMessage = (e) => {
         let text = e.target.value;
-        props.updateMessage(text)
+        this.props.updateMessage(text)
     }
 
-    let onAddMessage = () => {
-        props.addMessage();
+    onAddMessage = () => {
+        this.props.addMessage();
     }
 
-    return (
-        <div className={s.content}>
-            <div className={s.dialogs}>
-                {dialogElements}
-            </div>
-
-            <div className={s.dialog}>
-                {messageElements}
-                <div>
-                    <textarea className={s.inputText} onChange={onUpdateMessage} value={props.areaValue}></textarea>
+    render() {
+        return (
+            <div className={s.content}>
+                <div className={s.dialogs}>
+                    {this.createDialogElements()}
                 </div>
-                <button className={s.inputButton} onClick={onAddMessage}>Отправить</button>
-            </div>
 
-        </div>
-    );
+                <div className={s.dialog}>
+                    {this.createMessageElements()}
+                    <div>
+                        <textarea className={s.inputText} onChange={this.onUpdateMessage} value={this.props.areaValue}></textarea>
+                    </div>
+                    <button className={s.inputButton} onClick={this.onAddMessage}>Отправить</button>
+                </div>
+
+            </div>
+        );
+    }
 }
 
 export default MessagePage;

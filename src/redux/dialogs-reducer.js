@@ -1,22 +1,23 @@
 const ADD_MESSSAGE = "ADD-MESSAGE";
 const UPDATE_CURRENT_TEXT_MESSAGE = "UPDATE-CURRENT-TEXT-MESSAGE";
+const SET_DIALOGS = "SET-DIALOGS";
 
 let initialState = {
-    messageData : [
-        {id: 1, message: "Привет"},
-        {id: 2, message: "Как дела?"}
+    messageData: [
+        // {id: 1, message: "Привет"},
+        // {id: 2, message: "Как дела?"}
     ],
-    currentTextMessage : "",
-    dialogData : [
-        {id: 1, name: "Пользователь 1"},
-        {id: 2, name: "Пользователь 2"},
-        {id: 3, name: "Пользователь 3"}
+    currentTextMessage: "",
+    dialogData: [
+        // {id: 1, name: "Пользователь 1"},
+        // {id: 2, name: "Пользователь 2"},
+        // {id: 3, name: "Пользователь 3"}
     ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case ADD_MESSSAGE:
             let newMessage = {
                 id: 3,
@@ -32,6 +33,12 @@ const dialogsReducer = (state = initialState, action) => {
                 ...state,
                 currentTextMessage: action.message
             }
+        case SET_DIALOGS: {
+            return { ...state, 
+                messageData: [...state.messageData, ...action.messageData],
+                currentTextMessage: action.currentTextMessage,
+                dialogData: [...state.dialogData, ...action.dialogData]}
+        }
         default:
             return state;
     }
@@ -47,6 +54,15 @@ export const updateMessageActionCreater = (text) => {
     return {
         type: UPDATE_CURRENT_TEXT_MESSAGE,
         message: text
+    }
+}
+
+export const setDialogsActionCreater = (messageData,currentTextMessage,dialogData) => {
+    return {
+        type: SET_DIALOGS,
+        messageData: messageData,
+        currentTextMessage: currentTextMessage,
+        dialogData: dialogData
     }
 }
 
