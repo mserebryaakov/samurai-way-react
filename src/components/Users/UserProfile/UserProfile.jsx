@@ -1,4 +1,5 @@
 import s from './UserProfile.module.css'
+import avatar from '../../../assets/avatar.jpg'
 
 function UserProfile(props) {
 
@@ -11,12 +12,11 @@ function UserProfile(props) {
         <div className={s.profile}>
             <div className={s.content}>
                 <div>
-                    <img className={s.photo} src={props.state.avatar}></img>
+                    <img className={s.photo} src={props.state.photos.large === null? avatar : props.state.photos.large}></img>
                 </div>
                 <div className={s.profileInfo}>
                     <p className={s.item}>{props.state.name}</p>
-                    <p className={s.item}>Подписчиков: {props.state.subscribers}</p>
-                    <p className={s.item}>Подписок: {props.state.subscription}</p>
+                    <p className={s.item}>Статус: {props.state.status}</p>
                 </div>
             </div>
             <div className={s.divButton}>

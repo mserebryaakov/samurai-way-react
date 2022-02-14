@@ -4,14 +4,14 @@ const SET_DIALOGS = "SET-DIALOGS";
 
 let initialState = {
     messageData: [
-        // {id: 1, message: "Привет"},
-        // {id: 2, message: "Как дела?"}
+        {id: 1, message: "Привет"},
+        {id: 2, message: "Как дела?"}
     ],
     currentTextMessage: "",
     dialogData: [
-        // {id: 1, name: "Пользователь 1"},
-        // {id: 2, name: "Пользователь 2"},
-        // {id: 3, name: "Пользователь 3"}
+        {id: 1, name: "Пользователь 1"},
+        {id: 2, name: "Пользователь 2"},
+        {id: 3, name: "Пользователь 3"}
     ]
 };
 

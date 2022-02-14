@@ -2,17 +2,8 @@ import s from './MessagePage.module.css'
 import Dialogs from './Dialogs/Dialogs'
 import Message from './Message/Message'
 import React from 'react'
-import * as axios from 'axios'
 
 class MessagePage extends React.Component {
-
-    componentDidMount() {
-        axios.get("http://localhost:8181/users").then(response => {
-                this.props.setUsers(response.data.messageData,
-                    response.data.currentTextMessage,
-                    response.data.dialogData)
-            });
-    }
 
     createMessageElements = () => {
         return (
