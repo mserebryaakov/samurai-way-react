@@ -1,5 +1,6 @@
 import s from './UserProfile.module.css'
 import avatar from '../../../assets/avatar.jpg'
+import {NavLink} from 'react-router-dom'
 
 function UserProfile(props) {
 
@@ -12,7 +13,10 @@ function UserProfile(props) {
         <div className={s.profile}>
             <div className={s.content}>
                 <div>
-                    <img className={s.photo} src={props.state.photos.large === null? avatar : props.state.photos.large}></img>
+                    <NavLink to={"/profile/" + props.state.id}>
+                        <img className={s.photo} src={props.state.photos.large === null ? avatar : props.state.photos.large}></img>
+                    </NavLink>
+
                 </div>
                 <div className={s.profileInfo}>
                     <p className={s.item}>{props.state.name}</p>
