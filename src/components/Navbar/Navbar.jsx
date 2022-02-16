@@ -5,13 +5,13 @@ function Navbar() {
     return (
         <nav className={s.nav}>
             <span className={s.profile}>
-                <NavLink to="/profile" className = { navData => navData.isActive ? s.active : s.a }>Профиль</NavLink>
+                <NavLink to="/profile" activeClassName = { s.active }>Профиль</NavLink>
             </span>
             <span className={s.message}>
-                <NavLink to="/message" className = { navData => navData.isActive ? s.active : s.a }>Сообщения</NavLink>
+                <NavLink to="/message" activeClassName = { s.active }>Сообщения</NavLink>
             </span>
             <span className={s.message}>
-                <NavLink to="/users" className = { navData => navData.isActive ? s.active : s.a }>Пользователи</NavLink>
+                <NavLink to="/users" activeClassName = { s.active }>Пользователи</NavLink>
             </span>
         </nav>
     );

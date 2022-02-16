@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import React from 'react'
 import Post from './Post/Post'
 import * as axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 class MainPageAPIContainer extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${2}`).then(response => {
+        let userId = this.props.match.params.userID;
+        if (!userId) {
+            userId = 2;
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
             this.props.setUserProfile(response.data);
         });
     }
@@ -48,13 +53,15 @@ let mapStateToProps = (state) => {
     }
 }
 
+let withUrlDataContainer = withRouter(MainPageAPIContainer);
+
 const MainPageContainer = connect(mapStateToProps,
     {
         updatePostText,
         addPost,
         setUserProfile
     }
-)(MainPageAPIContainer);
+)(withUrlDataContainer);
 
 
 export default MainPageContainer;
