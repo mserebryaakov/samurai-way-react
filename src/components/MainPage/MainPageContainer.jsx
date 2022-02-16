@@ -1,10 +1,17 @@
-import { updatePostText, addPost } from '../../redux/profile-reducer'
+import { updatePostText, addPost, setUserProfile } from '../../redux/profile-reducer'
 import MainPage from './MainPage'
 import { connect } from 'react-redux';
 import React from 'react'
 import Post from './Post/Post'
+import * as axios from 'axios';
 
 class MainPageAPIContainer extends React.Component {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${2}`).then(response => {
+            this.props.setUserProfile(response.data);
+        });
+    }
 
     createPostElements = () => {
         return (
@@ -25,10 +32,10 @@ class MainPageAPIContainer extends React.Component {
     render() {
         return (
             <MainPage onUpdateText={this.onUpdateText}
-                onAddPost={this.onAddPost} 
+                onAddPost={this.onAddPost}
                 postElements={this.createPostElements}
                 profileData={this.props.profileData}
-                areaValue={this.props.areaValue}/>
+                areaValue={this.props.areaValue} />
         );
     }
 }
@@ -41,12 +48,13 @@ let mapStateToProps = (state) => {
     }
 }
 
-const MainPageContainer = connect(mapStateToProps, 
+const MainPageContainer = connect(mapStateToProps,
     {
         updatePostText,
-        addPost
+        addPost,
+        setUserProfile
     }
-    )(MainPageAPIContainer);
+)(MainPageAPIContainer);
 
 
 export default MainPageContainer;

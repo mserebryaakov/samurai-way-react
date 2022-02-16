@@ -1,16 +1,22 @@
+import Preloader from '../../Preloader/Preloader';
 import s from './Profile.module.css'
+import avatar from '../../../assets/avatar.jpg'
 
 function Profile(props) {
+    if (!props.profile) {
+        return <Preloader />
+    }
+
     return (
         <div className={s.profile}>
             <div className={s.content}>
                 <div>
-                    <img className={s.photo} src="https://avatars.githubusercontent.com/u/82521656?v=4"></img>
+                    <img className={s.photo} src={props.profile.photos.large === null? avatar : props.profile.photos.large}></img>
                 </div>
                 <div className={s.profileInfo}>
-                    <p className={s.item}>{props.state.name}</p>
-                    <p className={s.item}>Подписчиков: {props.state.subscribers}</p>
-                    <p className={s.item}>Подписок: {props.state.subscription}</p>
+                    <p className={s.item}>{props.profile.fullName}</p>
+                    <p className={s.item}>git: {props.profile.contacts.github}</p>
+                    <p className={s.item}>{props.profile.contacts.lookingForAJobDescription}</p>
                 </div>
             </div>
         </div>

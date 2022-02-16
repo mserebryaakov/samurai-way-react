@@ -1,12 +1,13 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_CURRENT_TEXT_POST = "UPDATE-CURRENT-TEXT-POST"
+const SET_USER_PROFILE = "SET-USER-PROFILE"
 
 let initialState = {
     postData : [
 
     ],
     currentTextPost : "",
-    profileData : {id: 1, name: "User 1", subscribers: 1234, subscription: 123}
+    profileData : null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -29,6 +30,12 @@ const profileReducer = (state = initialState, action) => {
                 currentTextPost: action.message
             }
         }
+        case SET_USER_PROFILE: {
+            return {
+                ...state, 
+                profileData: action.profileData
+            }
+        }
         default:
             return state;
     }
@@ -44,6 +51,13 @@ export const updatePostText = (text) => {
     return {
         type: UPDATE_CURRENT_TEXT_POST,
         message: text
+    }
+}
+
+export const setUserProfile = (profile) => {
+    return {
+        type: SET_USER_PROFILE,
+        profileData: profile
     }
 }
 
