@@ -1,4 +1,4 @@
-import { updatePostActionCreater, addPostActionCreater } from '../../redux/profile-reducer'
+import { updatePostText, addPost } from '../../redux/profile-reducer'
 import MainPage from './MainPage'
 import { connect } from 'react-redux';
 import React from 'react'
@@ -41,18 +41,12 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        updatePostText: (text) => {
-            dispatch(updatePostActionCreater(text));
-        },
-        addPost: () => {
-            dispatch(addPostActionCreater());
-        }
+const MainPageContainer = connect(mapStateToProps, 
+    {
+        updatePostText,
+        addPost
     }
-}
-
-const MainPageContainer = connect(mapStateToProps, mapDispatchToProps)(MainPageAPIContainer);
+    )(MainPageAPIContainer);
 
 
 export default MainPageContainer;
