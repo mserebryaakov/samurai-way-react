@@ -1,34 +1,34 @@
-import { follow, setUsers, setCurrentPage, setUsersTotalCount,toggleIsFetching } from '../../redux/users-reducer'
+import { follow, setUsers, setCurrentPage, setUsersTotalCount,toggleIsFetching, unfollow} from '../../redux/users-reducer'
 import UsersPage from './UsersPage';
 import { connect } from 'react-redux';
 import React from 'react';
 import UserProfile from './UserProfile/UserProfile';
-import * as axios from 'axios';
+import {usersAPI} from '../../api/api'
 
 class UsersPageAPIContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        usersAPI.setUsersRequest(this.props.currentPage,this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(response.data.items);
-            this.props.setUsersTotalCount(response.data.totalCount);
+            this.props.setUsers(data.items);
+            this.props.setUsersTotalCount(data.totalCount);
         });
     }
 
     createUsersElements = () => {
         return (
             this.props.allUsersProfiles
-                .map(element => <UserProfile state={element} follow={this.props.follow} key={element.id} />)
+                .map(element => <UserProfile state={element} follow={this.props.follow} unfollow={this.props.unfollow} key={element.id} />)
         )
     }
 
     updateCurrentPage = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        usersAPI.currentPageRequest(pageNumber,this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         });
     }
 
@@ -56,6 +56,7 @@ let mapStateToProps = (state) => {
 }
 
 const UsersPageContainer = connect(mapStateToProps, {
+    unfollow,
     follow,
     setUsers,
     setCurrentPage,
