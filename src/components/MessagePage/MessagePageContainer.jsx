@@ -4,6 +4,7 @@ import MessagePage from './MessagePage'
 import Dialogs from './Dialogs/Dialogs'
 import Message from './Message/Message'
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 
 class MessagePageAPIContainer extends React.Component {
 
@@ -31,6 +32,8 @@ class MessagePageAPIContainer extends React.Component {
     }
 
     render() {
+        if (!this.props.auth) return <Redirect to={"/login"}/>
+
         return (
             <MessagePage createDialogElements={this.createDialogElements}
             createMessageElements={this.createMessageElements}
@@ -45,7 +48,8 @@ let mapStateToProps = (state) => {
     return {
         messageData: state.messagePage.messageData,
         dialogData: state.messagePage.dialogData,
-        areaValue: state.messagePage.currentTextMessage
+        areaValue: state.messagePage.currentTextMessage,
+        auth: state.auth.isAuth
     }
 }
 
