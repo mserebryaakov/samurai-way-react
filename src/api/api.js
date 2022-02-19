@@ -31,3 +31,10 @@ export const usersAPI = {
         .then(response => response.data);
     }
 }
+
+export const mainPageApi = {
+    setUserProfileRequest(userId) {
+        return instance.get(`profile/${userId}`)
+        .then(response => response.data);
+    }
+}

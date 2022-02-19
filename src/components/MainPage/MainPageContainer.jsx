@@ -1,9 +1,8 @@
-import { updatePostText, addPost, setUserProfile } from '../../redux/profile-reducer'
+import { updatePostText, addPost, setUserProfileThunkCreator } from '../../redux/profile-reducer'
 import MainPage from './MainPage'
 import { connect } from 'react-redux';
 import React from 'react'
 import Post from './Post/Post'
-import * as axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 class MainPageAPIContainer extends React.Component {
@@ -13,9 +12,7 @@ class MainPageAPIContainer extends React.Component {
         if (!userId) {
             userId = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
-            this.props.setUserProfile(response.data);
-        });
+        this.props.setUserProfileThunkCreator(userId);
     }
 
     createPostElements = () => {
@@ -59,7 +56,7 @@ const MainPageContainer = connect(mapStateToProps,
     {
         updatePostText,
         addPost,
-        setUserProfile
+        setUserProfileThunkCreator
     }
 )(withUrlDataContainer);
 

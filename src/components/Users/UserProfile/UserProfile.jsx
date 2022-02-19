@@ -1,26 +1,17 @@
 import s from './UserProfile.module.css'
 import avatar from '../../../assets/avatar.jpg'
 import { NavLink } from 'react-router-dom'
-import {usersAPI} from '../../../api/api'
 
 function UserProfile(props) {
 
     let onFollow = () => {
         let userID = props.state.id;
-        usersAPI.onFollowRequest(userID).then(data => {
-            if (data.resultCode === 0) {
-                props.follow(userID);
-            }
-        });
+        props.followThunkCreator(userID);
     }
 
     let onUnfollow = () => {
         let userID = props.state.id;
-        usersAPI.onUnfollowRequest(userID).then(data => {
-            if (data.resultCode === 0) {
-                props.unfollow(userID);
-            }
-        });
+        props.unfollowThunkCreator(userID);
     }
 
     return (
@@ -38,7 +29,9 @@ function UserProfile(props) {
                 </div>
             </div>
             <div className={s.divButton}>
-                {props.state.followed ? <button className={s.followButton} onClick={onUnfollow}>Отписаться</button> : <button className={s.followButton} onClick={onFollow}>Подписаться</button>}
+                {props.state.followed ?
+                    <button disabled={props.isFollowingProgress.some(id => id === props.state.id)} className={s.followButton} onClick={onUnfollow}>Отписаться</button>
+                    : <button disabled={props.isFollowingProgress.some(id => id === props.state.id)} className={s.followButton} onClick={onFollow}>Подписаться</button>}
             </div>
         </div>
     );
