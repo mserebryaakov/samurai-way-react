@@ -3,6 +3,8 @@ import UsersPage from './UsersPage';
 import { connect } from 'react-redux';
 import React from 'react';
 import UserProfile from './UserProfile/UserProfile';
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import { compose } from 'redux';
 
 class UsersPageAPIContainer extends React.Component {
 
@@ -50,15 +52,21 @@ let mapStateToProps = (state) => {
     }
 }
 
-const UsersPageContainer = connect(mapStateToProps, {
-    unfollow,
-    follow,
-    toggleIsFollowingProgress,
-    getUsersThunkCreator,
-    switchPageGetUsersThunkCreator,
-    followThunkCreator,
-    unfollowThunkCreator
-})(UsersPageAPIContainer);
+export default compose(
+    connect(mapStateToProps, {unfollow,follow,toggleIsFollowingProgress,getUsersThunkCreator,
+        switchPageGetUsersThunkCreator,followThunkCreator,unfollowThunkCreator}),
+    withAuthRedirect
+)(UsersPageAPIContainer)
+
+// const UsersPageContainer = connect(mapStateToProps, {
+//     unfollow,
+//     follow,
+//     toggleIsFollowingProgress,
+//     getUsersThunkCreator,
+//     switchPageGetUsersThunkCreator,
+//     followThunkCreator,
+//     unfollowThunkCreator
+// })(UsersPageAPIContainer);
 
 
-export default UsersPageContainer;
+// export default UsersPageContainer;

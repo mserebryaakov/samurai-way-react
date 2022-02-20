@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import React from 'react'
 import Post from './Post/Post'
 import { withRouter } from 'react-router-dom';
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import { compose } from 'redux';
 
 class MainPageAPIContainer extends React.Component {
 
@@ -50,15 +52,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let withUrlDataContainer = withRouter(MainPageAPIContainer);
-
-const MainPageContainer = connect(mapStateToProps,
-    {
-        updatePostText,
-        addPost,
-        setUserProfileThunkCreator
-    }
-)(withUrlDataContainer);
-
-
-export default MainPageContainer;
+export default compose(
+    connect(mapStateToProps, { updatePostText, addPost, setUserProfileThunkCreator }),
+    withRouter,
+    withAuthRedirect
+)(MainPageAPIContainer)

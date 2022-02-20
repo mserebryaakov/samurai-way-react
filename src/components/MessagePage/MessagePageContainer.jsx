@@ -4,7 +4,8 @@ import MessagePage from './MessagePage'
 import Dialogs from './Dialogs/Dialogs'
 import Message from './Message/Message'
 import React from 'react'
-import {Redirect} from 'react-router-dom'
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import { compose } from 'redux';
 
 class MessagePageAPIContainer extends React.Component {
 
@@ -32,8 +33,6 @@ class MessagePageAPIContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.auth) return <Redirect to={"/login"}/>
-
         return (
             <MessagePage createDialogElements={this.createDialogElements}
             createMessageElements={this.createMessageElements}
@@ -53,7 +52,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-const MessagePageContainer = connect(mapStateToProps, 
-    {updateMessage,addMessage, setDialogs})(MessagePageAPIContainer);
-
-export default MessagePageContainer;
+export default compose(
+    connect(mapStateToProps, {updateMessage,addMessage, setDialogs}),
+    withAuthRedirect
+)(MessagePageAPIContainer)
