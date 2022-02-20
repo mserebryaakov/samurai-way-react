@@ -1,6 +1,7 @@
 import Preloader from '../../Preloader/Preloader';
 import s from './Profile.module.css'
 import avatar from '../../../assets/avatar.jpg'
+import ProfileStatus from './ProfileStatus'
 
 function Profile(props) {
     if (!props.profile) {
@@ -16,7 +17,7 @@ function Profile(props) {
                 <div className={s.profileInfo}>
                     <p className={s.item}>{props.profile.fullName}</p>
                     <p className={s.item}>git: {props.profile.contacts.github}</p>
-                    <p className={s.item}>{props.profile.contacts.lookingForAJobDescription}</p>
+                    <ProfileStatus status={"Тутуту"}/>
                 </div>
             </div>
         </div>
