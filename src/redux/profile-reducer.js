@@ -1,15 +1,17 @@
-import { mainPageApi } from '../api/api'
+import { mainPageApi,profileApi } from '../api/api'
 
 const ADD_POST = "ADD-POST";
 const UPDATE_CURRENT_TEXT_POST = "UPDATE-CURRENT-TEXT-POST"
 const SET_USER_PROFILE = "SET-USER-PROFILE"
+const SET_USER_STATUS = "SET-USER-STATUS"
 
 let initialState = {
     postData : [
 
     ],
     currentTextPost : "",
-    profileData : null
+    profileData : null,
+    status: "Нет статуса"
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -38,6 +40,12 @@ const profileReducer = (state = initialState, action) => {
                 profileData: action.profileData
             }
         }
+        case SET_USER_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state;
     }
@@ -64,11 +72,36 @@ export const setUserProfile = (profile) => {
     }
 }
 
+export const setUserStatus = (status) => {
+    return {
+        type: SET_USER_STATUS,
+        status: status
+    }
+}
+
 //Thunk
 export const setUserProfileThunkCreator = (userId) => {
     return (dispatch) => {
         mainPageApi.setUserProfileRequest(userId).then(data => {
             dispatch(setUserProfile(data));
+        });
+    }
+}
+
+export const setUserStatusThunkCreator = (userId) => {
+    return (dispatch) => {
+        profileApi.getUserStatusRequest(userId).then(data => {
+            dispatch(setUserStatus(data));
+        });
+    }
+}
+
+export const changeUserStatusThunkCreator = (status) => {
+    return (dispatch) => {
+        mainPageApi.changeStatusRequest(status).then(resultCode => {
+            if (resultCode === 0) {
+                dispatch(setUserStatus(status))
+            }
         });
     }
 }

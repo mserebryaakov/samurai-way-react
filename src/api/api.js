@@ -13,6 +13,13 @@ const instanceHeaders = axios.create({
     }
 })
 
+export const profileApi = {
+    getUserStatusRequest(userId) {
+        return instance.get(`profile/status/${userId}`)
+        .then(response => response.data);
+    }
+}
+
 export const usersAPI = {
     setUsersRequest(currentPage, pageSize) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
@@ -36,5 +43,9 @@ export const mainPageApi = {
     setUserProfileRequest(userId) {
         return instance.get(`profile/${userId}`)
         .then(response => response.data);
+    },
+    changeStatusRequest(status) {
+        return instanceHeaders.put(`profile/status/`, {status: status})
+            .then(response => response.resultCode);
     }
 }

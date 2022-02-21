@@ -57,16 +57,3 @@ export default compose(
         switchPageGetUsersThunkCreator,followThunkCreator,unfollowThunkCreator}),
     withAuthRedirect
 )(UsersPageAPIContainer)
-
-// const UsersPageContainer = connect(mapStateToProps, {
-//     unfollow,
-//     follow,
-//     toggleIsFollowingProgress,
-//     getUsersThunkCreator,
-//     switchPageGetUsersThunkCreator,
-//     followThunkCreator,
-//     unfollowThunkCreator
-// })(UsersPageAPIContainer);
-
-
-// export default UsersPageContainer;

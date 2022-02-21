@@ -5,7 +5,7 @@ import React from 'react'
 let MainPage = (props) => {
     return (
         <div className={s.content}>
-            <Profile profile={props.profileData} />
+            <Profile profile={props.profileData} status={props.status} onChangeStatus={props.onChangeStatus}/>
 
             <div className={s.inputGrid}>
                 <div>

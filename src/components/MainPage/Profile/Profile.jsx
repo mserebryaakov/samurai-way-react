@@ -17,7 +17,7 @@ function Profile(props) {
                 <div className={s.profileInfo}>
                     <p className={s.item}>{props.profile.fullName}</p>
                     <p className={s.item}>git: {props.profile.contacts.github}</p>
-                    <ProfileStatus status={"Тутуту"}/>
+                    <ProfileStatus status={props.status} onChangeStatus={props.onChangeStatus}/>
                 </div>
             </div>
         </div>

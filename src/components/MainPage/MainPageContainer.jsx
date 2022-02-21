@@ -1,4 +1,4 @@
-import { updatePostText, addPost, setUserProfileThunkCreator } from '../../redux/profile-reducer'
+import { updatePostText, addPost, setUserProfileThunkCreator, setUserStatusThunkCreator, changeUserStatusThunkCreator } from '../../redux/profile-reducer'
 import MainPage from './MainPage'
 import { connect } from 'react-redux';
 import React from 'react'
@@ -12,9 +12,10 @@ class MainPageAPIContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userID;
         if (!userId) {
-            userId = 2;
+            userId = 22493;
         }
         this.props.setUserProfileThunkCreator(userId);
+        this.props.setUserStatusThunkCreator(userId);
     }
 
     createPostElements = () => {
@@ -39,7 +40,9 @@ class MainPageAPIContainer extends React.Component {
                 onAddPost={this.onAddPost}
                 postElements={this.createPostElements}
                 profileData={this.props.profileData}
-                areaValue={this.props.areaValue} />
+                areaValue={this.props.areaValue}
+                status={this.props.status}
+                onChangeStatus={this.props.changeUserStatusThunkCreator} />
         );
     }
 }
@@ -48,12 +51,13 @@ let mapStateToProps = (state) => {
     return {
         postData: state.mainPage.postData,
         areaValue: state.mainPage.currentTextPost,
-        profileData: state.mainPage.profileData
+        profileData: state.mainPage.profileData,
+        status: state.mainPage.status
     }
 }
 
 export default compose(
-    connect(mapStateToProps, { updatePostText, addPost, setUserProfileThunkCreator }),
+    connect(mapStateToProps, { updatePostText, addPost, setUserProfileThunkCreator,setUserStatusThunkCreator, changeUserStatusThunkCreator }),
     withRouter,
     withAuthRedirect
 )(MainPageAPIContainer)
