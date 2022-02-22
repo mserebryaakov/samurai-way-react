@@ -1,3 +1,7 @@
 .content {
     grid-area: cont;
   }
+
+.loginContainer {
+  text-align: center;
+}
