@@ -12,7 +12,7 @@ class MainPageAPIContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userID;
         if (!userId) {
-            userId = 22493;
+            userId = this.props.profileId;
         }
         this.props.setUserProfileThunkCreator(userId);
         this.props.setUserStatusThunkCreator(userId);
@@ -52,7 +52,8 @@ let mapStateToProps = (state) => {
         postData: state.mainPage.postData,
         areaValue: state.mainPage.currentTextPost,
         profileData: state.mainPage.profileData,
-        status: state.mainPage.status
+        status: state.mainPage.status,
+        profileId: state.auth.userId
     }
 }
 

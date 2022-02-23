@@ -38,7 +38,7 @@ export const setUserData = (userId,email,login, isAuth) => {
 
 export const setUserThunkCreator = () => {
     return (dispatch) => {
-        authAPI.setUserRequest().then(data => {
+        return authAPI.setUserRequest().then(data => {
             if (data.resultCode === 0) {
                 let { id, login, email } = data.data;
                 dispatch(setUserData(id, email, login, true));
