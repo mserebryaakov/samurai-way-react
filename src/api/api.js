@@ -13,10 +13,25 @@ const instanceHeaders = axios.create({
     }
 })
 
-export const profileApi = {
+export const authAPI = {
+    loginRequest(email, password, rememberMe) {
+        return instance.post(`auth/login`, { email, password, rememberMe })
+            .then(response => response.data.resultCode);
+    },
+    setUserRequest() {
+        return instance.get(`auth/me`, { withCredentials: true })
+        .then(response => response.data);
+    },
+    logoutRequest() {
+        return instance.delete('auth/login')
+            .then(response => response.data.resultCode)
+    }
+}
+
+export const profileAPI = {
     getUserStatusRequest(userId) {
         return instance.get(`profile/status/${userId}`)
-        .then(response => response.data);
+            .then(response => response.data);
     }
 }
 
@@ -35,17 +50,17 @@ export const usersAPI = {
     },
     onFollowRequest(userID) {
         return instanceHeaders.post(`follow/${userID}`, {})
-        .then(response => response.data);
+            .then(response => response.data);
     }
 }
 
-export const mainPageApi = {
+export const mainPageAPI = {
     setUserProfileRequest(userId) {
         return instance.get(`profile/${userId}`)
-        .then(response => response.data);
+            .then(response => response.data);
     },
     changeStatusRequest(status) {
-        return instanceHeaders.put(`profile/status/`, {status: status})
+        return instanceHeaders.put(`profile/status/`, { status: status })
             .then(response => response.resultCode);
     }
 }

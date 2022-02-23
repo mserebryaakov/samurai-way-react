@@ -5,7 +5,7 @@ import MessagePageContainer from './components/MessagePage/MessagePageContainer'
 import { Route } from "react-router-dom";
 import MainPageContainer from './components/MainPage/MainPageContainer';
 import UsersPageContainer from './components/Users/UsersPageContainer';
-import Login from './components/Login/Login';
+import LoginPageContainer from './components/Login/LoginContainer';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="/profile/:userID?" render={() => <MainPageContainer />} />
         <Route path="/message" render={() => <MessagePageContainer />} />
         <Route path="/users" render={() => <UsersPageContainer />} />
-        <Route path="/login" render={() => <Login />} />
+        <Route path="/login" render={() => <LoginPageContainer />} />
       </div>
 
     </div>

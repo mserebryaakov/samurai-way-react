@@ -1,7 +1,14 @@
 import s from './Login.module.css'
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { Redirect } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+
+    if (props.auth === true) {
+        return <Redirect to="/profile" />
+    }
+
     return (
         <div className={s.loginContainer}>
             <Formik
@@ -10,19 +17,31 @@ const LoginPage = () => {
                     password: '',
                     rememberMe: false,
                 }}
+                validationSchema={Yup.object({
+                    login: Yup.string()
+                        .email('Invalid email address')
+                        .required('Required login'),
+                    password: Yup.string()
+                        .required('Required password'),
+                })}
                 onSubmit={async (values) => {
-                    await new Promise((r) => setTimeout(r, 500));
-                    alert(JSON.stringify(values, null, 2));
+                    props.loginThunkCreator(values.login, values.password, values.rememberMe);
                 }}
             >
                 <Form>
                     <h2>Login</h2>
                     <div>
                         <Field id="login" name="login" placeholder="Login" />
+                        <div>
+                            <ErrorMessage name="login" />
+                        </div>
                     </div>
 
                     <div>
-                        <Field id="password" name="password" placeholder="Password" />
+                        <Field id="password" name="password" placeholder="Password" type="password"/>
+                        <div>
+                            <ErrorMessage name="password" />
+                        </div>
                     </div>
 
                     <div>

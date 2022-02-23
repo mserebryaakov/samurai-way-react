@@ -1,4 +1,4 @@
-import { mainPageApi,profileApi } from '../api/api'
+import { mainPageAPI,profileAPI } from '../api/api'
 
 const ADD_POST = "ADD-POST";
 const UPDATE_CURRENT_TEXT_POST = "UPDATE-CURRENT-TEXT-POST"
@@ -82,7 +82,7 @@ export const setUserStatus = (status) => {
 //Thunk
 export const setUserProfileThunkCreator = (userId) => {
     return (dispatch) => {
-        mainPageApi.setUserProfileRequest(userId).then(data => {
+        mainPageAPI.setUserProfileRequest(userId).then(data => {
             dispatch(setUserProfile(data));
         });
     }
@@ -90,7 +90,7 @@ export const setUserProfileThunkCreator = (userId) => {
 
 export const setUserStatusThunkCreator = (userId) => {
     return (dispatch) => {
-        profileApi.getUserStatusRequest(userId).then(data => {
+        profileAPI.getUserStatusRequest(userId).then(data => {
             dispatch(setUserStatus(data));
         });
     }
@@ -98,7 +98,7 @@ export const setUserStatusThunkCreator = (userId) => {
 
 export const changeUserStatusThunkCreator = (status) => {
     return (dispatch) => {
-        mainPageApi.changeStatusRequest(status).then(resultCode => {
+        mainPageAPI.changeStatusRequest(status).then(resultCode => {
             if (resultCode === 0) {
                 dispatch(setUserStatus(status))
             }
