@@ -1,7 +1,7 @@
 import Preloader from '../../Preloader/Preloader';
 import s from './Profile.module.css'
 import avatar from '../../../assets/avatar.jpg'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatus'
 
 function Profile(props) {
     if (!props.profile) {
@@ -17,7 +17,7 @@ function Profile(props) {
                 <div className={s.profileInfo}>
                     <p className={s.item}>{props.profile.fullName}</p>
                     <p className={s.item}>git: {props.profile.contacts.github}</p>
-                    <ProfileStatus status={props.status} onChangeStatus={props.onChangeStatus}/>
+                    <ProfileStatusWithHooks status={props.status} onChangeStatus={props.onChangeStatus}/>
                 </div>
             </div>
         </div>

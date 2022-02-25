@@ -5,6 +5,7 @@ import React from 'react';
 import UserProfile from './UserProfile/UserProfile';
 import {withAuthRedirect} from '../hoc/withAuthRedirect'
 import { compose } from 'redux';
+import {getAllUsersProfilesSelector, getPageSizeSelector, getTotalUserCountSelector, getCurrentPageSelector, getIsFetchingSelector, getIsFollowingProgressSelector} from '../../selectors/userPageSelector'
 
 class UsersPageAPIContainer extends React.Component {
 
@@ -43,12 +44,12 @@ class UsersPageAPIContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        allUsersProfiles: state.usersPage.allUsersProfiles,
-        pageSize: state.usersPage.pageSize,
-        totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isFollowingProgress: state.usersPage.isFollowingProgress
+        allUsersProfiles: getAllUsersProfilesSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUserCount: getTotalUserCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        isFollowingProgress: getIsFollowingProgressSelector(state)
     }
 }
 
