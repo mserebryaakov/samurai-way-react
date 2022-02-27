@@ -1,22 +1,22 @@
-import { mainPageAPI,profileAPI } from '../api/api'
+import { mainPageAPI, profileAPI } from '../api/api'
 
-const ADD_POST = "ADD-POST";
-const UPDATE_CURRENT_TEXT_POST = "UPDATE-CURRENT-TEXT-POST"
-const SET_USER_PROFILE = "SET-USER-PROFILE"
-const SET_USER_STATUS = "SET-USER-STATUS"
+const ADD_POST = "profile/ADD-POST";
+const UPDATE_CURRENT_TEXT_POST = "profile/UPDATE-CURRENT-TEXT-POST"
+const SET_USER_PROFILE = "profile/SET-USER-PROFILE"
+const SET_USER_STATUS = "profile/SET-USER-STATUS"
 
 let initialState = {
-    postData : [
+    postData: [
 
     ],
-    currentTextPost : "",
-    profileData : null,
+    currentTextPost: "",
+    profileData: null,
     status: "Нет статуса"
 };
 
 const profileReducer = (state = initialState, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case ADD_POST: {
             let newPost = {
                 id: 5,
@@ -36,7 +36,7 @@ const profileReducer = (state = initialState, action) => {
         }
         case SET_USER_PROFILE: {
             return {
-                ...state, 
+                ...state,
                 profileData: action.profileData
             }
         }
@@ -80,29 +80,20 @@ export const setUserStatus = (status) => {
 }
 
 //Thunk
-export const setUserProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        mainPageAPI.setUserProfileRequest(userId).then(data => {
-            dispatch(setUserProfile(data));
-        });
-    }
+export const setUserProfileThunkCreator = (userId) => async (dispatch) => {
+    let response = await mainPageAPI.setUserProfileRequest(userId);
+    dispatch(setUserProfile(response.data));
 }
 
-export const setUserStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getUserStatusRequest(userId).then(data => {
-            dispatch(setUserStatus(data));
-        });
-    }
+export const setUserStatusThunkCreator = (userId) => async (dispatch) => {
+    let response = await profileAPI.getUserStatusRequest(userId)
+    dispatch(setUserStatus(response.data));
 }
 
-export const changeUserStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        mainPageAPI.changeStatusRequest(status).then(resultCode => {
-            if (resultCode === 0) {
-                dispatch(setUserStatus(status))
-            }
-        });
+export const changeUserStatusThunkCreator = (status) => async (dispatch) => {
+    let response = await mainPageAPI.changeStatusRequest(status)
+    if (response.resultCode === 0) {
+        dispatch(setUserStatus(status))
     }
 }
 

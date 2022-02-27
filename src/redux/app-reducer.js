@@ -1,6 +1,6 @@
 import {setUserThunkCreator} from './auth-reducer'
 
-const APP_IS_INITIALIZED = "APP-IS-INITIALIZED"
+const APP_IS_INITIALIZED = "app/APP-IS-INITIALIZED"
 
 let initialState = {
     initialized: false

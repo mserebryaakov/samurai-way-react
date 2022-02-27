@@ -15,52 +15,42 @@ const instanceHeaders = axios.create({
 
 export const authAPI = {
     loginRequest(email, password, rememberMe) {
-        return instance.post(`auth/login`, { email, password, rememberMe })
-            .then(response => response.data.resultCode);
+        return instance.post(`auth/login`, { email, password, rememberMe });
     },
     setUserRequest() {
-        return instance.get(`auth/me`, { withCredentials: true })
-        .then(response => response.data);
+        return instance.get(`auth/me`, { withCredentials: true });
     },
     logoutRequest() {
-        return instance.delete('auth/login')
-            .then(response => response.data.resultCode)
+        return instance.delete('auth/login');
     }
 }
 
 export const profileAPI = {
     getUserStatusRequest(userId) {
-        return instance.get(`profile/status/${userId}`)
-            .then(response => response.data);
+        return instance.get(`profile/status/${userId}`);
     }
 }
 
 export const usersAPI = {
     setUsersRequest(currentPage, pageSize) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => response.data);
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`);
     },
     currentPageRequest(pageNumber, pageSize) {
-        return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
-            .then(response => response.data);
+        return instance.get(`users?page=${pageNumber}&count=${pageSize}`);
     },
     onUnfollowRequest(userID) {
-        return instanceHeaders.delete(`follow/${userID}`)
-            .then(response => response.data);
+        return instanceHeaders.delete(`follow/${userID}`);
     },
     onFollowRequest(userID) {
-        return instanceHeaders.post(`follow/${userID}`, {})
-            .then(response => response.data);
+        return instanceHeaders.post(`follow/${userID}`, {});
     }
 }
 
 export const mainPageAPI = {
     setUserProfileRequest(userId) {
-        return instance.get(`profile/${userId}`)
-            .then(response => response.data);
+        return instance.get(`profile/${userId}`);
     },
     changeStatusRequest(status) {
-        return instanceHeaders.put(`profile/status/`, { status: status })
-            .then(response => response.resultCode);
+        return instanceHeaders.put(`profile/status/`, { status: status });
     }
 }

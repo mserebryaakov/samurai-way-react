@@ -1,12 +1,12 @@
 import { usersAPI } from '../api/api'
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET-USERS";
-const CURRENT_PAGE = "CURRENT-PAGE";
-const TOTAL_COUNT_PAGE = "TOTAL-COUNT-PAGE"
-const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
-const TOGGLE_IS_FOLOWING_PROGRESS = "TOGGLE-IS-FOLOWING-PROGRESS"
+const FOLLOW = "users/FOLLOW";
+const UNFOLLOW = "users/UNFOLLOW";
+const SET_USERS = "users/SET-USERS";
+const CURRENT_PAGE = "users/CURRENT-PAGE";
+const TOTAL_COUNT_PAGE = "users/TOTAL-COUNT-PAGE"
+const TOGGLE_IS_FETCHING = "users/TOGGLE-IS-FETCHING"
+const TOGGLE_IS_FOLOWING_PROGRESS = "users/TOGGLE-IS-FOLOWING-PROGRESS"
 
 let initialState = {
     allUsersProfiles: [],
@@ -120,49 +120,37 @@ export const toggleIsFollowingProgress = (isFetching, userId) => {
 }
 
 //THUNK
-export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
-        dispatch(toggleIsFetching(true));
-        usersAPI.setUsersRequest(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-            dispatch(setUsersTotalCount(data.totalCount));
-        });
+export const getUsersThunkCreator = (currentPage, pageSize) => async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    let response = await usersAPI.setUsersRequest(currentPage, pageSize);
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.data.items));
+    dispatch(setUsersTotalCount(response.data.totalCount));
+}
+
+export const switchPageGetUsersThunkCreator = (pageNumber, pageSize) => async (dispatch) => {
+    dispatch(setCurrentPage(pageNumber));
+    dispatch(toggleIsFetching(true));
+    let response = await usersAPI.currentPageRequest(pageNumber, pageSize)
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.data.items));
+}
+
+export const followThunkCreator = (userID) => async (dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userID));
+    let response = await usersAPI.onFollowRequest(userID);
+    if (response.data.resultCode === 0) {
+        dispatch(follow(userID));
+        dispatch(toggleIsFollowingProgress(false, userID));
     }
 }
 
-export const switchPageGetUsersThunkCreator = (pageNumber, pageSize) => {
-    return (dispatch) => {
-        dispatch(setCurrentPage(pageNumber));
-        dispatch(toggleIsFetching(true));
-        usersAPI.currentPageRequest(pageNumber, pageSize).then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-        });
-    }
-}
-
-export const followThunkCreator = (userID) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgress(true, userID));
-        usersAPI.onFollowRequest(userID).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(follow(userID));
-                dispatch(toggleIsFollowingProgress(false, userID));
-            }
-        });
-    }
-}
-
-export const unfollowThunkCreator = (userID) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgress(true, userID));
-        usersAPI.onUnfollowRequest(userID).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollow(userID));
-                dispatch(toggleIsFollowingProgress(false, userID));
-            }
-        });
+export const unfollowThunkCreator = (userID) => async (dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userID));
+    let response = await usersAPI.onUnfollowRequest(userID)
+    if (response.data.resultCode === 0) {
+        dispatch(unfollow(userID));
+        dispatch(toggleIsFollowingProgress(false, userID));
     }
 }
 
