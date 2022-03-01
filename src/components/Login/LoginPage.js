@@ -29,6 +29,9 @@ const LoginPage = (props) => {
                 }}
             >
                 <Form>
+                    <h3>Данные для теста:</h3>
+                    <h3>Email: free@samuraijs.com</h3>
+                    <h3>Password: free</h3>
                     <h2>Login</h2>
                     <div>
                         <Field id="login" name="login" placeholder="Login" />
