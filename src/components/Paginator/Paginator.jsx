@@ -3,7 +3,6 @@ import React from 'react'
 
 let Paginator = (props) => {
     let pageCount = Math.ceil(props.totalUserCount / props.pageSize);
-    debugger;
     return (
         <div className={s.paginator}>
             {((props.currentPage - 1) !== 0) &&

@@ -4,13 +4,14 @@ import Navbar from './components/Navbar/Navbar';
 import MessagePageContainer from './components/MessagePage/MessagePageContainer';
 import { Route } from "react-router-dom";
 import MainPageContainer from './components/MainPage/MainPageContainer';
-import UsersPageContainer from './components/Users/UsersPageContainer';
 import LoginPageContainer from './components/Login/LoginContainer';
-import React from 'react';
+import React, {Suspense} from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {initializedAppThunkCreator} from './redux/app-reducer';
+import { initializedAppThunkCreator } from './redux/app-reducer';
 import Preloader from './components/Preloader/Preloader';
+
+const UsersPageContainer = React.lazy(() => import('./components/Users/UsersPageContainer'));
 
 class App extends React.Component {
 
@@ -33,7 +34,9 @@ class App extends React.Component {
         <div className="app-wrapper-content">
           <Route path="/profile/:userID?" render={() => <MainPageContainer />} />
           <Route path="/message" render={() => <MessagePageContainer />} />
-          <Route path="/users" render={() => <UsersPageContainer />} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route path="/users" render={() => <UsersPageContainer />} />
+          </Suspense>
           <Route path="/login" render={() => <LoginPageContainer />} />
         </div>
 
@@ -43,7 +46,7 @@ class App extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  return { 
+  return {
     initialized: state.app.initialized
   };
 }
