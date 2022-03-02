@@ -4,6 +4,7 @@ const ADD_POST = "profile/ADD-POST";
 const UPDATE_CURRENT_TEXT_POST = "profile/UPDATE-CURRENT-TEXT-POST"
 const SET_USER_PROFILE = "profile/SET-USER-PROFILE"
 const SET_USER_STATUS = "profile/SET-USER-STATUS"
+const SET_USER_AVATAR = "profile/SET-USER-AVATAR"
 
 let initialState = {
     postData: [
@@ -46,6 +47,12 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
             }
         }
+        case SET_USER_AVATAR: {
+            return {
+                ...state,
+                profileData: {...state.profileData, photos: action.photos}
+            }
+        }
         default:
             return state;
     }
@@ -79,6 +86,13 @@ export const setUserStatus = (status) => {
     }
 }
 
+export const setUserAvatar = (photos) => {
+    return {
+        type: SET_USER_AVATAR,
+        photos: photos
+    }
+}
+
 //Thunk
 export const setUserProfileThunkCreator = (userId) => async (dispatch) => {
     let response = await mainPageAPI.setUserProfileRequest(userId);
@@ -97,4 +111,10 @@ export const changeUserStatusThunkCreator = (status) => async (dispatch) => {
     }
 }
 
+export const savePhotoThunkCreator = (photoFile) => async (dispatch) => {
+    let response = await profileAPI.setUserAvatar(photoFile)
+    if (response.data.resultCode === 0) {
+        dispatch(setUserAvatar(response.data.data.photos))
+    }
+}
 export default profileReducer;

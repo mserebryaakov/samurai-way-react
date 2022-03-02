@@ -9,7 +9,7 @@ const instanceHeaders = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        "API-KEY": "d6a230a3-1bba-464d-994d-4808a067d4a3"
+        "API-KEY": "1639c510-565b-4888-a47f-b429194049c9"
     }
 })
 
@@ -28,6 +28,11 @@ export const authAPI = {
 export const profileAPI = {
     getUserStatusRequest(userId) {
         return instance.get(`profile/status/${userId}`);
+    },
+    setUserAvatar(photoFile) {
+        const formData = new FormData();
+        formData.append("image",photoFile)
+        return instanceHeaders.put('profile/photo',formData);
     }
 }
 

@@ -29,3 +29,12 @@
   margin: 0;
   width: 300px;
 }
+
+.inputFile {
+  display: none;
+}
+
+.avatarButton {
+  border: dashed black;
+  flex: 1;
+}
