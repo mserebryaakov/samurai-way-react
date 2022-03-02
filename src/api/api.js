@@ -2,11 +2,6 @@ import * as axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/'
-})
-
-const instanceHeaders = axios.create({
-    withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
         "API-KEY": "1639c510-565b-4888-a47f-b429194049c9"
@@ -32,7 +27,7 @@ export const profileAPI = {
     setUserAvatar(photoFile) {
         const formData = new FormData();
         formData.append("image",photoFile)
-        return instanceHeaders.put('profile/photo',formData);
+        return instance.put('profile/photo',formData);
     }
 }
 
@@ -44,10 +39,10 @@ export const usersAPI = {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`);
     },
     onUnfollowRequest(userID) {
-        return instanceHeaders.delete(`follow/${userID}`);
+        return instance.delete(`follow/${userID}`);
     },
     onFollowRequest(userID) {
-        return instanceHeaders.post(`follow/${userID}`, {});
+        return instance.post(`follow/${userID}`, {});
     }
 }
 
@@ -56,6 +51,6 @@ export const mainPageAPI = {
         return instance.get(`profile/${userId}`);
     },
     changeStatusRequest(status) {
-        return instanceHeaders.put(`profile/status/`, { status: status });
+        return instance.put(`profile/status/`, { status: status });
     }
 }
